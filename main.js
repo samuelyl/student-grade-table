@@ -1,7 +1,10 @@
 var tableBody = document.querySelector(".table");
-var newGradeTable = new GradeTable (tableBody);
+var gradeTable = new GradeTable (tableBody);
 var header = document.querySelector(".header");
-var newPageHeader = new PageHeader(header);
-var newApp = new App(newGradeTable, newPageHeader);
+var pageHeader = new PageHeader(header);
+var form = document.getElementById("main-form");
+var gradeForm = new GradeForm(form);
 
-newApp.start();
+var app = new App(gradeTable, pageHeader, gradeForm);
+
+app.start();
