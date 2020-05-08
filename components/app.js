@@ -22,7 +22,11 @@ class App {
       sum += grades[gradeIndex].grade;
     }
     var average = (sum / grades.length);
-    this.pageHeader.updateAverage(average.toFixed(2));
+    if (isNaN(average)){
+      this.pageHeader.updateAverage("N/A");
+    } else {
+      this.pageHeader.updateAverage(average.toFixed(2));
+    }
   }
   getGrades(){
     $.ajax({
@@ -63,7 +67,15 @@ class App {
     this.getGrades();
   }
   deleteGrade(id){
-    console.log(id);
+    $.ajax({
+      method: "DELETE",
+      url: "https://sgt.lfzprototypes.com/api/grades/"+id,
+      headers: {
+        "X-Access-Token": "zb4Z8Ohq"
+      },
+      success: this.handleDeleteGradeSuccess,
+      error: this.handleDeleteGradeError,
+    })
   }
   handleDeleteGradeError(error){
     console.error(error);
